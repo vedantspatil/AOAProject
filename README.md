@@ -1,50 +1,50 @@
 # Analysis Of Algorithm Projects
 
-## GREEDY ALGORITHM
+# GREEDY ALGORITHM
 
 Based on given problem statement discuss various greedy approaches to solve this problem. These approaches are also restricted by their time complexities.
-### PROBLEM STATEMENT
+## PROBLEM STATEMENT
 You are a house painter that is available from day 1 . . . n (inclusive). You can only paint one house in a day. It also only takes one day to paint a house. You are given m houses. For each house i, you are also given startDayi and endDayi for i = 1, . . . , m. The house i can only be painted on a day between startDayi and endDayi (inclusive). The given houses are already sorted primarily on startDay and secondarily on endDay (in case of equality of the startDay). You are tasked to find the maximum number of houses that you can paint.
 We have discussed all the given 4 strategies, their design in required time complexity and implementation in the below sections, followed by comparative study of each of the implementation. We have also implemented the STRAT4 which we found to be optimal greedy in Ɵ(m logm )
 
-#### STRAT 1 - O(n) 
+### STRAT 1 - O(n) 
 Iterate over each day starting from day 1 . . . n. For each day, among the unpainted houses that are available to be painted on that day, paint the house that started being available the earliest.
 
-##### Analysis
+#### Analysis
 The Strat 1 algorithm iterates for all the days and picks the first eligible house for that day. For any day where there is no suitable house, the algorithm skips the day. Similarly for the houses which are past the deadline in the list, the algorithm will skip those houses. Since each iteration, we can assign a house for that day, skip the house or skip the day, in the best case the algorithm will run in O(n) complexity. In some cases the algorithm would have to skip over a large number of houses and the complexity might go above O(n), but still the main variable component for the algorithm is the parameter n, as small n means early termination and large n means we have to go over all houses to make sure we schedule something on maximum number of days. Therefore we can assume the algorithm is
 θ(n). Apart from the input (Space - O(m)), the algorithm uses a
 list variable to store indices of the scheduled houses, therefore the space
 complexity is O(m).
 
-#### STRAT 2 - O(n+mlog(m)) 
+### STRAT 2 - O(n+mlog(m)) 
 Iterate over each day starting from day 1 . . . n. For each day, among the unpainted houses that are available that day, paint the house that started being available the latest.
 
-##### Analysis
+#### Analysis
 The Strat 2 algorithm iterates for all the days and picks the first eligible house for that day from the priority queue. For every iteration, the algorithm adds all the houses that can be scheduled on the day. Since a house can only be added to the queue once, it takes O(mlog(m)) time to add houses to the priority queue. Now since for each day we poll the best house from the priority queue, it takes O(log(m)) time to remove a house. Since every house can be polled at max once from the priority queue, the complexity of polling is O(log(m)). Therefore in the worst case, we would end up adding all the houses to the priority queue on the first day, but since no new add operation will happen for the following days there would be just poll operations. The overall worst complexity would be O(n+m*log(m)+m*log(m)), which would be O(n+m*log(m)).
 Apart from the input (Space - O(m)), the algorithm uses a list variable to store indices of the scheduled houses and a priority queue which at max would have
 m houses in it, therefore the space complexity is O(m).
 
-#### STRAT 3 - O(n+mlog(m)) 
+### STRAT 3 - O(n+mlog(m)) 
 Iterate over each day starting from day 1 . . . n. For each day, among the unpainted houses that are available that day, paint the house that is available for the shortest duration.
 
-##### Analysis
+#### Analysis
 
 The Strat 3 algorithm is similar to the one discussed in strat 2, only the priority in the priority queue is different. Therefore, the overall worst complexity would be O(n+m*log(m)+m*log(m)), which would be O(n+m*log(m)).
 Apart from the input (Space - O(m)), the algorithm uses a list variable to store indices of the scheduled houses and a priority queue which at max would have m
 houses in it, therefore the space complexity is O(m).
 
 
-#### STRAT 4 - O(n+mlog(m)) 
+### STRAT 4 - O(n+mlog(m)) 
 Iterate over each day starting from day 1 . . . n. For each day, among the unpainted houses that are available that day, paint the house that will stop being available the earliest.
 
-##### Analysis
+#### Analysis
 
 The Strat 4 algorithm is similar to the one discussed in strat 3, only the priority in the priority queue is different. Therefore, the overall worst complexity would be O(n+m*log(m)+m*log(m)), which would be O(n+m*log(m)).
 Apart from the input (Space - O(m)), the algorithm uses a list variable to store
 indices of the scheduled houses and a priority queue which at max would have
 m houses in it, therefore the space complexity is O(m).
 
-#### EXPERIMENTAL COMPARITIVE STUDY
+### EXPERIMENTAL COMPARITIVE STUDY
 We created different data sets For n = 1000 to 5000 and m = n/4 to 5n/4 for each n and ran different strategies on those datasets. Following figures 1 to 4 show respective graphical representation of results obtained.
 
 <picture>
@@ -76,10 +76,10 @@ To summarize above finding, we created datasets for n =1000 to 5000 and ran diff
 
 
 
-#### OPTIMAL SOLUTION - (mlog(m))
+### OPTIMAL SOLUTION - (mlog(m))
 Design and analyze (time, space and correctness) of an Θ(mlog(m)) algorithm based on the greedy strategy
 
-##### Analysis
+#### Analysis
 
 1. The above algorithm would one by one pick a house and find all the eligible
 houses which are eligible to be painted on the same day.
@@ -97,7 +97,7 @@ is O(m).
 7. In the best case the heap size will always be 1,i.e only open ended houses are present in our dataset. Which certainly brings down the overall time but
 the complexity would still be Θ(m log(m)) as we have.
 
-#### EXPERIMENTAL COMPARITIVE STUDY
+### EXPERIMENTAL COMPARITIVE STUDY
 We compare strat 4 with Optimal solution 
 
 1. We analyzed the run time of both the algorithms, and observed that for sufficiently larger input size i.e n, we get 2 times the efficiency as compared to the Strat4 algorithm.
@@ -129,3 +129,45 @@ We compare strat 4 with Optimal solution
 </picture>
 
 
+# DYNAMIC PROGRAMMING
+
+Based on given problem statement discuss various dynamic programming approaches to solve this problem. These approaches are also restricted by their time complexities.
+
+## PROBLEM STATEMENT
+
+Consider a town named Greenvale that has a grid layout of m × n plots of land. Associated with each plot (i, j) where i = 1, . . . , m and j = 1, . . . , n, Greenvale’s Parks and Recreation Department assigns a non-negative number p[i, j] indicating the minimum number of trees that must be planted on that plot. A local environmental group named GreenHands is interested in finding the largest possible square shaped area of plots within the town that requires a minimum of h trees to be planted on each plot individually. More formally, problems are stated below, where Problem1 is a special case of Problem2 and Problem3.
+
+### Problem1
+
+Given a matrix p of m × n integers (non-negative) representing the minimum number of trees that must be planted on each plot and an integer h (positive), find the bounding indices of a square area where each plot enclosed requires a minimum of h trees to be planted.
+
+### Alg1 Design a Θ(m3n3) time Brute Force algorithm for solving Problem1.
+#### Task1 - Implementation of Alg1.
+
+### Alg2 Design a Θ(m2n2) time algorithm for solving Problem1.
+#### Task2 - Implementation of Alg2.
+
+### Alg3 Design a Θ(mn) time Dynamic Programming algorithm for solving Problem1.
+#### Task3 - Implementation of Alg3.
+
+
+
+### Problem2
+Given a matrix p of m × n integers (non-negative) representing the minimum number of trees that must be planted on each plot and an integer h (positive), find the bounding indices of a square area where all but the corner plots enclosed requires a minimum of h trees to be planted. The corner plots can have any number of trees required.
+
+### Alg4 Design a Θ(mn2) time Dynamic Programming algorithm for solving Problem2. 
+#### Task3 - Implementation of Alg4.
+
+### Alg5 Design a Θ(mn) time Dynamic Programming algorithm for solving Problem2. 
+#### Task5a Give a recursive implementation of Alg5 using Memoization. 
+#### Task5b Give an iterative BottomUp implementation of Alg5.
+
+### Problem3
+Given a matrix p of m × n integers (non-negative) representing the minimum number of trees that must be planted on each plot and an integer h (positive), find the bounding indices of a square area where where only up to k enclosed plots can have a minimum tree requirement of less than h.
+
+### Alg6 Design a Θ(m3n3) time Brute Force algorithm for solving Problem3.
+#### Task6 Give an implementation of Alg6.
+
+### Alg7 Design a Θ(mnk) time Dynamic Programming algorithm for solving Problem3.
+#### Task7a Give a recursive implementation of Alg7 using Memoization. 
+#### Task7b Give an iterative BottomUp implementation of Alg7.
