@@ -1,0 +1,20 @@
+run1:
+	python3 aoa_assignment2.py ALG1
+
+run2:
+	python3 aoa_assignment2.py ALG2
+
+run3:
+	python3 aoa_assignment2.py ALG3
+
+run4:
+	python3 aoa_assignment2.py ALG4
+
+run5A:
+	python3 aoa_assignment2.py ALG5A
+
+run5B:
+	python3 aoa_assignment2.py ALG5B
+
+run6:
+	python3 aoa_assignment2.py ALG6
